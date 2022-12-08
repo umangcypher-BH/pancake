@@ -15,15 +15,15 @@ on:
 jobs:
  do-it:
     runs-on: ubuntu-latest
-build:
+
 steps:
-    - uses: actions/checkout@v3
-    - name: Scripts
-      run: |
-          docker build -t app .
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag app umangcypherbh/trivyscan
-          docker push umangcypherbh/trivyscan
+   # - uses: actions/checkout@v3
+   # - name: Scripts
+   #   run: |
+   #       docker build -t app .
+   #       echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+   #       docker tag app umangcypherbh/trivyscan
+   #       docker push umangcypherbh/trivyscan
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: echo Hello, world!
