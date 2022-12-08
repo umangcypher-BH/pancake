@@ -18,8 +18,8 @@ jobs:
   docker:
     uses: umangcypher-BH/pancake/.github/workflows/main.yml@master
     with:
-      image_name: umangcypherbh/trivyscan
-      tag: $umangcypherbh/trivyscan
+      image_name: trivyscan
+      tag: umangcypherbh/trivyscan
     secrets:
       username: ${{secrets.DOCKER_USERNAME}}
       password: ${{secrets.DOCKER_PASSWORD}}
