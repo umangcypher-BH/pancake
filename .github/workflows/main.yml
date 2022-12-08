@@ -102,7 +102,7 @@ jobs:
     - name: Docker Login
       uses: docker/login-action@v2
       with:
-          registry: ghcr.io
+          #registry: ghcr.io
           username: umangcypherbh
           password: ${{ secrets.DOCKER_PASSWORD }}  
     - name: Push Docker Image to registry
