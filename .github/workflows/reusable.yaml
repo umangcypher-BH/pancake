@@ -1,6 +1,6 @@
 # This is a basic workflow to showcase the use of Reusable Workflows
 
-name: Reusable Workflow user
+name: reusable
 
 on:
   workflow_dispatch:
