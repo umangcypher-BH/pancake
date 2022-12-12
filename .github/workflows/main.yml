@@ -1,4 +1,5 @@
 name: main
+
 on:
   workflow_call:
     inputs:
@@ -12,6 +13,8 @@ on:
         required: true
       DOCKER_PASSWORD:
         required: true
+        
+        
 jobs:
  do-it:
     runs-on: ubuntu-latest
