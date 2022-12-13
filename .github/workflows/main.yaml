@@ -63,6 +63,9 @@ jobs:
     - name: Run Trivy  scan for Docker Image and generate html report
       run: |
           docker run  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.28.0 image umangcypherbh/trivyscan
+    - name: Run Trivy scan for filesystem and generate html report(Trivy will look for vulnerabilities based on lock files such as Gemfile.lock and package-lock.json)
+      run: |
+          /usr/local/bin/trivy fs --format template --template "@./pancake/html.tpl" --ignorefile "./pancake/.trivyignore" -o Report2.html ${{ inputs.Packages_lock }}
       
     -
         name: Checkout
