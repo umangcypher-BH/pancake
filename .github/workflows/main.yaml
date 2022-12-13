@@ -50,12 +50,12 @@ jobs:
     - name: copy template file from  shared-workflows repo
       run: |
           git clone https://${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}@github.com/umangcypher-BH/pancake.git
-    #- name: copy the docker file to template directory
-     # run: |
-      #    cp ${{ inputs.docker_file_path }}/Dockerfile ./shared-workflows/configs   
-    #- name: Install Trivy CLI
-     # run: |
-      #    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
+    - name: copy the docker file to template directory
+      run: |
+          cp ${{ inputs.docker_file_path }}/Dockerfile ./pancake/configs   
+    - name: Install Trivy CLI
+      run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
     -
         name: Checkout
         uses: actions/checkout@v3
