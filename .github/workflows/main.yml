@@ -92,10 +92,10 @@ jobs:
       with:
           registry: hub.docker.com
           username: ${{ secrets.DOCKER_HUB_USERNAME }} 
-          password: ${{ secrets.DOCKER_PASSWORD }}  
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}  
     - name: Push Docker Image to registry
       run: |
-         docker image push ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
+         docker image push ${{ inputs.hub.docker.com }}${{ inputs.image_name }}:${{ inputs.image_tag }}
  build:
         runs-on: ubuntu-latest
 
@@ -105,11 +105,11 @@ jobs:
         - name: Setup BuildX
           uses: docker/setup-buildx-action@v1
 
-        - name: Login to the Registry
+        - name: Login to the docker
           uses: docker/login-action@v1
           with:
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
-            password: ${{ secrets.DOCKER_PASSWORD }}
+            password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         - name: Set the tag
           run: |
             if [ -z "${{inputs.tag}}" ]
