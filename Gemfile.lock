@@ -1,0 +1,13 @@
+PATH  remote: .
+  specs: gem_one (0.0.1)
+
+GEM  remote: http://example.org/  specs: gem_two (0.0.2)
+    gem_three (0.0.3)
+    gem_four (0.0.4)
+
+PLATFORMS
+  platform
+
+DEPENDENCIES
+  gem_two
+  gem_one!
