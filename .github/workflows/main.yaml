@@ -66,7 +66,7 @@ jobs:
               
     - name: Run Trivy scan for filesystem and generate html report(Trivy will look for vulnerabilities based on lock files such as Gemfile.lock and package-lock.json)
       run: |
-          /usr/local/bin/trivy fs --format template --template "@./pancake/html.tpl" --ignorefile "./pancake/.trivyignore" -o Report2.html ${{ inputs.Package_lock }}
+          /usr/local/bin/trivyscan fs --format template --template "@./pancake/html.tpl" --ignorefile "./pancake/.trivyignore" -o Report2.html ${{ inputs.Package_lock }}
       
     -
         name: Checkout
