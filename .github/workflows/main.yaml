@@ -62,7 +62,7 @@ jobs:
           /usr/local/bin/trivy image --download-db-only
     - name: Run Trivy  scan for Docker Image and generate html report
       run: |
-          /usr/local/bin/trivy image  --format template --template "@github.com/umangcypher-BH/pancake/html.tpl" --ignorefile "github.com/umangcypher-BH/pancake/.trivyignore" -o Report.html ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
+          docker run  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.28.0 image umangcypherbh/trivyscan
       
     -
         name: Checkout
