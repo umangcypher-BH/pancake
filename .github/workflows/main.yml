@@ -96,7 +96,7 @@ jobs:
       #- name: Push Docker Image to registry
        # run: |
         #  docker image push ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
-    build:
+   build:
         runs-on: ubuntu-latest
 
         steps:      
