@@ -58,7 +58,7 @@ jobs:
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
     - name: trivy image scan
       run: |
-          trivy image  trivyscan
+          trivy image  umangcypherbh/trivyscan
           
     - name: downloading  vulnerability  database
       run: |
