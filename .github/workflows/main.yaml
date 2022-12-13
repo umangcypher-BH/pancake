@@ -43,6 +43,19 @@ jobs:
       
     - name: Checkout code
       uses: actions/checkout@v2
+      
+    - name: Build docker image from Dockerfile (Optional)
+      run: |
+          docker build -t ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}  ${{ inputs.docker_file_path }}
+    - name: copy template file from  shared-workflows repo
+      run: |
+          git clone https://${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}@github.com/BH-Corporate-Functions/shared-workflows.git
+    - name: copy the docker file to template directory
+      run: |
+          cp ${{ inputs.docker_file_path }}/Dockerfile ./shared-workflows/configs   
+    - name: Install Trivy CLI
+      run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
     -
         name: Checkout
         uses: actions/checkout@v3
