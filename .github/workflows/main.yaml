@@ -44,9 +44,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    #- name: Build docker image from Dockerfile (Optional)
-     # run: |
-      #    docker build -t ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}  ${{ inputs.docker_file_path }}
+    - name: Build docker image from Dockerfile (Optional)
+      run: |
+          docker build -t ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}  ${{ inputs.docker_file_path }}
     - name: copy template file from  shared-workflows repo
       run: |
           git clone https://${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}@github.com/umangcypher-BH/pancake.git
@@ -56,9 +56,14 @@ jobs:
     - name: Install Trivy CLI
       run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
+          
     - name: downloading  vulnerability  database
       run: |
-          /usr/local/bin/trivy image --download-db-only 
+          /usr/local/bin/trivy image --download-db-only
+    - name: Run Trivy  scan for Docker Image and generate html report
+      run: |
+          /usr/local/bin/trivy image  --format template --template "@./pancake/html.tpl" --ignorefile "./pancake/.trivyignore" -o Report.html ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
+      
     -
         name: Checkout
         uses: actions/checkout@v3
