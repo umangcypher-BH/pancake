@@ -30,13 +30,13 @@ jobs:
       #- name: copy the docker file to template directory
        # run: |
         #  cp ${{ inputs.docker_file_path }}/Dockerfile ./shared-workflows/configs   
-    - name: Install Trivy CLI
-      run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
+   # - name: Install Trivy CLI
+    #  run: |
+     #     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
  
-    - name: downloading  vulnerability  database
-      run: |
-          /usr/local/bin/trivy image --download-db-only  
+   # - name: downloading  vulnerability  database
+    #  run: |
+     #     /usr/local/bin/trivy image --download-db-only  
      
      # - name: Run Trivy  scan for Docker Image and generate html report
       #  run: |
@@ -53,10 +53,10 @@ jobs:
      # - name: Append all reports to Report.html
       #  run: |
        #   cat Report3.html >> Report2.html;cat Report2.html >> Report.html
-    - name: Upload Trivy vulnerabilities Report to artifact
-      uses: actions/upload-artifact@v3
-      with:
-          path: "Report.html"  
+    #- name: Upload Trivy vulnerabilities Report to artifact
+     # uses: actions/upload-artifact@v3
+      #with:
+       #   path: "Report.html"  
 #      #  Send Trivy report from self-hosted runner
 #      - name: Send Report in mail
 #        uses: dawidd6/action-send-mail@v3
@@ -96,7 +96,7 @@ jobs:
       #- name: Push Docker Image to registry
        # run: |
         #  docker image push ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
-      build:
+    build:
         runs-on: ubuntu-latest
 
         steps:      
