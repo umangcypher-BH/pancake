@@ -92,7 +92,7 @@ jobs:
       with:
           registry: ghcr.io
           username: umangcypher-BH 
-          password: ${{ secrets.my bash script }}  
+          password: ${{ secrets.trivyscan }}  
     - name: Push Docker Image to registry
       run: |
          docker image push ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
