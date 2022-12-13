@@ -44,9 +44,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    #- name: Build docker image from Dockerfile (Optional)
-     # run: |
-      #    docker build --tag ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}  ${{ inputs.docker_file_path }}
+    - name: Build docker image from Dockerfile (Optional)
+      run: |
+          docker build trivyscan ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}  ${{ inputs.docker_file_path }}
     - name: copy template file from  shared-workflows repo
       run: |
           git clone https://${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}@github.com/umangcypher-BH/pancake.git
