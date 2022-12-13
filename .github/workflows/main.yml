@@ -24,15 +24,15 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
-      #- name: copy template file from  shared-workflows repo
-      #  run: |
-          #git clone https://${{ secrets.GH_TOKEN }}@github.com/BH-Corporate-Functions/shared-workflows.git
-      #- name: copy the docker file to template directory
-       # run: |
-        #  cp ${{ inputs.docker_file_path }}/Dockerfile ./shared-workflows/configs   
-   # - name: Install Trivy CLI
-    #  run: |
-     #     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
+    - name: copy template file from  shared-workflows repo
+      run: |
+          git clone https://${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}@github.com/BH-Corporate-Functions/shared-workflows.git
+    - name: copy the docker file to template directory
+      run: |
+          cp ${{ inputs.docker_file_path }}/Dockerfile ./shared-workflows/configs   
+    - name: Install Trivy CLI
+      run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.31.3
  
    # - name: downloading  vulnerability  database
     #  run: |
@@ -90,9 +90,9 @@ jobs:
     - name: Docker Login
       uses: docker/login-action@v2
       with:
-          registry: ghcr.io
-          username: umangcypher-BH 
-          password: ${{ secrets.trivyscan }}  
+          registry: hub.docker.com
+          username: ${{ secrets.DOCKER_HUB_USERNAME }} 
+          password: ${{ secrets.DOCKER_PASSWORD }}  
     - name: Push Docker Image to registry
       run: |
          docker image push ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
@@ -108,8 +108,8 @@ jobs:
         - name: Login to the Registry
           uses: docker/login-action@v1
           with:
-            username: ${{secrets.DOCKER_USERNAME}}
-            password: ${{secrets.DOCKER_PASSWORD}}
+            username: ${{ secrets.DOCKER_HUB_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
         - name: Set the tag
           run: |
             if [ -z "${{inputs.tag}}" ]
@@ -124,7 +124,7 @@ jobs:
           with:
            context: .
            push: true
-           tags: ${{secrets.DOCKER_USERNAME}}/${{inputs.image_name}}:${{env.final_tag}}
+           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{inputs.image_name}}:${{env.final_tag}}
           
  do-something-else:
           runs-on: ubuntu-latest
