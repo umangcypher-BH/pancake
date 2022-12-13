@@ -15,9 +15,9 @@ on:
         required: true
         
         
-#jobs:
- #do-it:
-  #  runs-on: ubuntu-latest
+jobs:
+ do-it:
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -87,16 +87,16 @@ on:
       #- name: check for Misconfig in Dockerfile (Optional)
        # run: |
         #  /usr/local/bin/trivy conf --exit-code 1 --severity CRITICAL --policy ./shared-workflows/policies  --namespaces user ./shared-workflows/configs
-      #- name: Docker Login
-       # uses: docker/login-action@v2
-        #with:
-         # registry: ghcr.io
-          #username: shyam-ks
-          #password: ${{ secrets.GH_TOKEN }}  
-      #- name: Push Docker Image to registry
-       # run: |
-        #  docker image push ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
-   build:
+    - name: Docker Login
+      uses: docker/login-action@v2
+      with:
+          registry: ghcr.io
+          username: umangcypher-BH 
+          password: ${{ secrets.my bash script }}  
+    - name: Push Docker Image to registry
+      run: |
+         docker image push ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}:${{ inputs.image_tag }}
+ build:
         runs-on: ubuntu-latest
 
         steps:      
@@ -122,12 +122,11 @@ on:
         - name: Build and Push the Image
           uses: docker/build-push-action@v2
           with:
-          context: .
-          push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/${{inputs.image_name}}:${{env.final_tag}}
+           context: .
+           push: true
+           tags: ${{secrets.DOCKER_USERNAME}}/${{inputs.image_name}}:${{env.final_tag}}
           
-        do-something-else:
+ do-something-else:
           runs-on: ubuntu-latest
           steps:
               - run: echo "Hello"
-       
