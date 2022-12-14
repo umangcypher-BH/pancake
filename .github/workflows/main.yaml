@@ -70,7 +70,18 @@ jobs:
     - name: Run Trivy scan for filesystem and generate html report(Trivy will look for vulnerabilities based on lock files such as Gemfile.lock and package-lock.json)
       run: |
           /usr/local/bin/trivy -q fs --format template --template "/pancake/html.tpl" --ignorefile "/pancake/.trivyignore" -o Report2.html ${{ inputs.Package_lock }}
-      
+    
+    - name: Run Trivy scan for dockerfile 
+      run: |
+          /usr/local/bin/trivy conf --policy ./pancake/policies --format template --template "@./pancake/html.tpl" -o Report3.html  --namespaces user ./pancake/configs
+        
+    - name: Append all reports to Report.html
+      run: |
+          cat Report3.html >> Report2.html;cat Report2.html >> Report.html
+    - name: Upload Trivy vulnerabilities Report to artifact
+      uses: actions/upload-artifact@v3
+      with:
+          path: "Report.html"  
     -
         name: Checkout
         uses: actions/checkout@v3
