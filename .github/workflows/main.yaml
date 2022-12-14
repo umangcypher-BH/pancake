@@ -73,7 +73,7 @@ jobs:
     
     - name: Run Trivy scan for dockerfile 
       run: |
-          /usr/local/bin/trivy conf --policy ./pancake/policies --format template --template "@./pancake/html.tpl" -o Report3.html  --namespaces user ./pancake/configs
+          /usr/local/bin/trivy conf --policy ./pancake/policies --format template --template "@./pancake/html.tpl" -o Report3.html  --namespaces user ./pancake/config
         
     - name: Append all reports to Report.html
       run: |
