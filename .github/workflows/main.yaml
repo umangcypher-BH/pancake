@@ -84,8 +84,8 @@ jobs:
           path: "Report.html"
     - name: check for Crtical & High vulnerabilities in Docker Image
       run: |
-          /usr/local/bin/trivy image --no-progress --exit-code 1 --severity CRITICAL,HIGH --ignore-unfixed --ignorefile "./pancake/.trivyignore" ${{ inputs.GHCR_REPO }}${{ inputs.image_name }}
-     
+          docker run  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.28.0 image umangcypherbh/trivyscan
+          
     - name: Check for filesystem (Trivy will look for vulnerabilities based on lock files such as Gemfile.lock and package-lock.json)
       run: |
           /usr/local/bin/trivy -q fs . --exit-code 1 --severity CRITICAL,HIGH --ignore-unfixed --ignorefile "./pancake/.trivyignore"  ${{ inputs.Packages_lock }}      
